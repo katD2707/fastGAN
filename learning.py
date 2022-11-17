@@ -1,10 +1,12 @@
 from utils import *
 from torch.nn import functional as F
 import random
+import lpips
 
 
 def train_d(net, data, label="real"):
     """Train function of discriminator"""
+    percept = lpips.PerceptualLoss(model='net-lin', net='vgg', use_gpu=True)
     if label == "real":
         part = random.randint(0, 3)
         pred, [rec_all, rec_small, rec_part] = net(data, label, part=part)

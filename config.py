@@ -35,7 +35,7 @@ def parse_args():
     parser.add_argument('--ckpt',
                         type=str,
                         default='None',
-                        help='checkpoint weight path if have one')
+                        help='checkpoint weights path if have one')
     parser.add_argument('--ndf',
                         type=int,
                         default=64,
