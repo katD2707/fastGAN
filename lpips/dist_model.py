@@ -5,11 +5,11 @@ import torch
 import os
 from collections import OrderedDict
 from torch.autograd import Variable
-from base_model import BaseModel
+from lpips.base_model import BaseModel
 from scipy.ndimage import zoom
 from tqdm import tqdm
 
-import networks_basic as networks
+import lpips.networks_basic as networks
 import lpips as util
 
 class DistModel(BaseModel):

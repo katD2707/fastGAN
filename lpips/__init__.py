@@ -5,9 +5,8 @@ from __future__ import print_function
 import numpy as np
 import skimage
 import torch
-from torch.autograd import Variable
 
-import dist_model
+from lpips import dist_model
 
 if skimage.__version__ == '0.14.3':
     from skimage.measure import compare_ssim

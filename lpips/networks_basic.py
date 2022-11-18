@@ -3,7 +3,7 @@ from __future__ import absolute_import
 import torch
 import torch.nn as nn
 from torch.autograd import Variable
-import pretrained_networks as pn
+import lpips.pretrained_networks as pn
 
 import lpips as util
 
