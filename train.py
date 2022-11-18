@@ -11,6 +11,7 @@ from learning import train_d
 from diffaug import DiffAugment
 import torch.utils as vutils
 import torch.nn.functional as F
+import config
 
 POLICY = 'color,translation'
 
@@ -138,3 +139,9 @@ def train(args):
                         'g_ema': avg_param_G,
                         'opt_g': optimizerG.state_dict(),
                         'opt_d': optimizerD.state_dict()}, saved_model_folder + '/all_%d.pth' % iteration)
+
+if __name__ == "__main__":
+    args = config.parse_args()
+    print(args)
+
+    train(args)
