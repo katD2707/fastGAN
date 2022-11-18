@@ -17,7 +17,7 @@ POLICY = 'color,translation'
 
 
 def train(args):
-    data_root = args.path
+    data_root = args.data_root
     total_iterations = args.iter
     checkpoint_path = args.ckpt
     batch_size = args.batch_size
@@ -26,6 +26,7 @@ def train(args):
     ngf = args.ngf
     nlr = args.nlr
     nbeta1 = args.nbeta1
+    current_iteration = args.start_iter
     saved_model_folder, saved_image_folder = get_dir(args)
 
     device = torch.device("cpu")

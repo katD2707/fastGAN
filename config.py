@@ -4,7 +4,7 @@ from argparse import ArgumentParser
 def parse_args():
     parser = ArgumentParser(description='region gan')
 
-    parser.add_argument('--path',
+    parser.add_argument('--data_root',
                         type=str,
                         default='../lmdbs/art_landscape_1k',
                         help='path of resource dataset, should be a folder that has one or many sub image folders inside')
