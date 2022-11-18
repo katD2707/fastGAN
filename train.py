@@ -23,7 +23,6 @@ def train(args):
     batch_size = args.batch_size
     im_size = args.im_size
     nz = args.nz
-    pdf = args.ndf
     ngf = args.ngf
     nlr = args.nlr
     nbeta1 = args.nbeta1
@@ -42,7 +41,7 @@ def train(args):
     ]
     trans = transforms.Compose(transform_list)
 
-    if 'lmdb' in args['data_root']:
+    if 'lmdb' in args.data_root:
         from datasets import MultiResolutionDataset
         dataset = MultiResolutionDataset(data_root, trans, 1024)
     else:
