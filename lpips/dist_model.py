@@ -12,7 +12,6 @@ from tqdm import tqdm
 import networks_basic as networks
 import lpips as util
 
-
 class DistModel(BaseModel):
     def name(self):
         return self.model_name
