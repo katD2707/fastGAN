@@ -61,7 +61,7 @@ def parse_args():
                         help='')
     parser.add_argument('--num_workers',
                         type=int,
-                        default=8,
+                        default=4,
                         help='')
     parser.add_argument('--save_interval',
                         type=int,
