@@ -13,9 +13,20 @@ import torchvision.utils as vutils
 import torch.nn.functional as F
 import config
 import lpips
-from utils import crop_image_by_part
 
 POLICY = 'color,translation'
+
+
+def crop_image_by_part(image, part):
+    hw = image.shape[2] // 2
+    if part == 0:
+        return image[:, :, :hw, :hw]
+    if part == 1:
+        return image[:, :, :hw, hw:]
+    if part == 2:
+        return image[:, :, hw:, :hw]
+    if part == 3:
+        return image[:, :, hw:, hw:]
 
 
 def train_d(net, data, label="real"):

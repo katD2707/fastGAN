@@ -36,18 +36,6 @@ def get_1d_dct(i, freq, L):
     return result * (1 if freq == 0 else math.sqrt(2))
 
 
-def crop_image_by_part(image, part):
-    hw = image.shape[2] // 2
-    if part == 0:
-        return image[:, :, :hw, :hw]
-    if part == 1:
-        return image[:, :, :hw, hw:]
-    if part == 2:
-        return image[:, :, hw:, :hw]
-    if part == 3:
-        return image[:, :, hw:, hw:]
-
-
 def copy_G_params(model):
     flatten = deepcopy(list(p.data for p in model.parameters()))
     return flatten
