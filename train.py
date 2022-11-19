@@ -44,6 +44,7 @@ def train(args):
     batch_size = args.batch_size
     im_size = args.im_size
     nz = args.nz
+    ndf = args.ndf
     ngf = args.ngf
     nlr = args.nlr
     nbeta1 = args.nbeta1
@@ -80,7 +81,7 @@ def train(args):
     netG.to(device)
 
     # Discriminator
-    netD = Discriminator(ndf=args.ndf, im_size=im_size)
+    netD = Discriminator(ndf=ndf, im_size=im_size)
     netD.apply(weights_init)
     netD.to(device)
 
