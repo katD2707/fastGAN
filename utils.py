@@ -62,3 +62,15 @@ def get_dir(args):
         json.dump(args.__dict__, f, indent=2)
 
     return saved_model_folder, saved_image_folder
+
+
+def crop_image_by_part(image, part):
+    hw = image.shape[2] // 2
+    if part == 0:
+        return image[:, :, :hw, :hw]
+    if part == 1:
+        return image[:, :, :hw, hw:]
+    if part == 2:
+        return image[:, :, hw:, :hw]
+    if part == 3:
+        return image[:, :, hw:, hw:]

@@ -1,6 +1,6 @@
 from discriminator import Discriminator
 from generator import Generator
-from utils import weights_init, copy_G_params, load_params, get_dir
+from utils import weights_init, copy_G_params, load_params, get_dir, crop_image_by_part
 import torch
 from torchvision import transforms
 from torch.utils.data import DataLoader
@@ -15,23 +15,11 @@ import config
 import lpips
 
 POLICY = 'color,translation'
-
-
-def crop_image_by_part(image, part):
-    hw = image.shape[2] // 2
-    if part == 0:
-        return image[:, :, :hw, :hw]
-    if part == 1:
-        return image[:, :, :hw, hw:]
-    if part == 2:
-        return image[:, :, hw:, :hw]
-    if part == 3:
-        return image[:, :, hw:, hw:]
+percept = lpips.PerceptualLoss(model='net-lin', net='vgg', use_gpu=True)
 
 
 def train_d(net, data, label="real"):
     """Train function of discriminator"""
-    percept = lpips.PerceptualLoss(model='net-lin', net='vgg', use_gpu=True)
     if label == "real":
         part = random.randint(0, 3)
         pred, [rec_all, rec_small, rec_part] = net(data, label, part=part)
