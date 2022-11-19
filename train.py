@@ -9,7 +9,7 @@ from torch import optim
 from tqdm import tqdm
 from learning import train_d
 from diffaug import DiffAugment
-import torch.utils as vutils
+import torchvision.utils as vutils
 import torch.nn.functional as F
 import config
 
