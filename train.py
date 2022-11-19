@@ -7,13 +7,34 @@ from torch.utils.data import DataLoader
 from datasets import InfiniteSamplerWrapper
 from torch import optim
 from tqdm import tqdm
-from learning import train_d
+import random
 from diffaug import DiffAugment
 import torchvision.utils as vutils
 import torch.nn.functional as F
 import config
+import lpips
+from utils import crop_image_by_part
 
 POLICY = 'color,translation'
+
+
+def train_d(net, data, label="real"):
+    """Train function of discriminator"""
+    percept = lpips.PerceptualLoss(model='net-lin', net='vgg', use_gpu=True)
+    if label == "real":
+        part = random.randint(0, 3)
+        pred, [rec_all, rec_small, rec_part] = net(data, label, part=part)
+        err = F.relu(torch.rand_like(pred) * 0.2 + 0.8 - pred).mean() + \
+              percept(rec_all, F.interpolate(data, rec_all.shape[2])).sum() + \
+              percept(rec_small, F.interpolate(data, rec_small.shape[2])).sum() + \
+              percept(rec_part, F.interpolate(crop_image_by_part(data, part), rec_part.shape[2])).sum()
+        err.backward()
+        return pred.mean().item(), rec_all, rec_small, rec_part
+    else:
+        pred = net(data, label)
+        err = F.relu(torch.rand_like(pred) * 0.2 + 0.8 + pred).mean()
+        err.backward()
+        return pred.mean().item()
 
 
 def train(args):
