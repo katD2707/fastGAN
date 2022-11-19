@@ -121,7 +121,7 @@ def train(args):
             backup_para = copy_G_params(netG)
             load_params(netG, avg_param_G)
             with torch.no_grad():
-                vutils.save_image(netG(fixed_noise)[0].add(1).mul(0.5), args.saved_image_folder + '/%d.jpg' % iteration,
+                vutils.save_image(netG(fixed_noise)[0].add(1).mul(0.5), saved_image_folder + '/%d.jpg' % iteration,
                                   nrow=4)
                 vutils.save_image(torch.cat([
                     F.interpolate(real_image, 128),
